@@ -3,6 +3,9 @@
 <head> 
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
   <title>測試！</title> 
+
+<?= self::javascript_include_tag('test.js') ?>
+<?= self::stylesheet_link_tag('test2.css') ?>
 </head> 
 <body> 
 <? require($__view__); ?>

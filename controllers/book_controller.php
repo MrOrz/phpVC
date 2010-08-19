@@ -1,5 +1,5 @@
 <?php
-class ChoiceController extends Controller{
+class BookController extends Controller{
   static private function login_required(){
     if(!isset($_SESSION['uid']))
       parent::redirect('login/index', array('msg'=>'請重新登入')); 
