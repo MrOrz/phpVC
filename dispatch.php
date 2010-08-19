@@ -2,8 +2,8 @@
 class Dispatcher{
 
   const DEBUG = true;
-  const DEFAULT_CONTROLLER = 'test';
-  const DEFAULT_ACTION     = 'page';
+  const DEFAULT_CONTROLLER = 'login';
+  const DEFAULT_ACTION     = 'index';
   
   private static function error($controller, $action, $params, $msg){
     echo "<h1>Error occurred</h1><p>$msg</p>";
