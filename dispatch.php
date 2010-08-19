@@ -2,8 +2,8 @@
 class Dispatcher{
 
   const DEBUG = true;
-  const DEFAULT_CONTROLLER = 'login';
-  const DEFAULT_ACTION     = 'index';
+  const DEFAULT_CONTROLLER = 'test';
+  const DEFAULT_ACTION     = 'page';
   
   private static function error($controller, $action, $params, $msg){
     echo "<h1>Error occurred</h1><p>$msg</p>";
@@ -24,12 +24,10 @@ class Dispatcher{
     $__script_path = substr($_SERVER['SCRIPT_NAME'], 0, strrpos($_SERVER['SCRIPT_NAME'], '/')+1);
     $__uri = preg_split('/[\/?&]+/', substr($_SERVER['REQUEST_URI'], strlen($__script_path)));
     
-    //$requestURI = array_values($requestURI);  // re-index the array
-    
     //var_dump($__script_path);
-    //print_r($__uri);
+    //print_r($__uri);    
+    //exit(0);  
     
-    //exit(0);
     /* parse result */
     $__controller = $__uri[0] === '' ? self::DEFAULT_CONTROLLER : $__uri[0];
     $__controller_obj = ucfirst($__controller).'Controller';

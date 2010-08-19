@@ -5,9 +5,12 @@ class Controller{
     exit(0);
   }
 
-  /* offers render and redirect and etc. */
+  /* ------------------------------------------------------------------
+     methods for derived controllers, called with parent:: namespace */
   
-  /* render(controller, action, params passed to layout and view)*/
+  /* render(controller, action, params passed to layout and view) */
+  /*   renders a view of the specific action, with the layout for the
+       specific controller.                                           */
   public static function render($controller, $action, $params=NULL){
     $__script_path = substr($_SERVER['SCRIPT_NAME'], 0, strrpos($_SERVER['SCRIPT_NAME'], '/')+1);
     // $__script_path: for use in layouts and views
@@ -29,6 +32,7 @@ class Controller{
   }
   
   /* redirect(url, $_GET array)*/
+  /*  redirect to a specific url, which will invoke the controller method call */
   public static function redirect($url, $_get=NULL){
     $script_path = substr($_SERVER['SCRIPT_NAME'], 0, strrpos($_SERVER['SCRIPT_NAME'], '/')+1);
     
@@ -40,7 +44,11 @@ class Controller{
     exit(0);
   }
   
-  /* helper functions */
+  /* ------------------------------------------------------------------
+     methods for views and layouts. called with self:: namespace     */
+  
+  /* path_to(controller, action, $_GET) */
+  /* returns a string representing an URL path pointing to an action */
   public static function path_to($controller, $action, $_get=NULL){
     $script_path = substr($_SERVER['SCRIPT_NAME'], 0, strrpos($_SERVER['SCRIPT_NAME'], '/')+1);
     if(is_array($_get))
@@ -49,12 +57,16 @@ class Controller{
       return $script_path.$controller.'/'.$action;
   }
 
+  /* stylesheet_link_tag( file name with path ) */
+  /* returns a string of a link tag */
   public static function stylesheet_link_tag($file_name){
     $script_path = substr($_SERVER['SCRIPT_NAME'], 0, strrpos($_SERVER['SCRIPT_NAME'], '/')+1);
     srand(); $salt = rand();
     return "<link href=\"$script_path$file_name?$salt\" rel=\"stylesheet\" type=\"text/css\" />\n";
   }
-
+  
+  /* javascript_include_tag( file name with path ) */
+  /* returns a string of a script tag */
   public static function javascript_include_tag($file_name){
     $script_path = substr($_SERVER['SCRIPT_NAME'], 0, strrpos($_SERVER['SCRIPT_NAME'], '/')+1);
     srand(); $salt = rand();
