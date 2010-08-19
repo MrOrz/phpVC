@@ -1,8 +1,8 @@
 <?php
 class Database{
   const DATABASE_URL  = 'localhost';
-  const DATABASE_NAME = 'eecourse' ;
-  const USER          = 'root';
+  const DATABASE_NAME = '' ;
+  const USER          = '';
   const PASSWORD      = '';
   
   const DEBUG = true;
@@ -45,8 +45,8 @@ class Database{
     return mysql_insert_id($this->_link);
   }
   public function escape($text){
-    return $text;
-    //return mysql_real_escape_string($text ,$this->_link);
+    //return $text;
+    return mysql_real_escape_string($text ,$this->_link);
   }
 };
     

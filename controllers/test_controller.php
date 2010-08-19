@@ -1,7 +1,7 @@
 <?php
 class TestController extends Controller{
-  static function test($p){
-    parent::render('test', 'test', $p);
+  static function page($p){
+    parent::render('test', 'page', $p);
   }
 };
 ?>

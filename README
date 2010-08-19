@@ -1,0 +1,12 @@
+phpVC - a tiny View-Controller model for PHP.
+
+This tiny framework is just a "wheel" built by me to help me around, 
+with NO considerations of scalability or design pattern or anything like that.
+
+The core of phpVC is published under BSD License, 
+but ... is there anyone other than me gonna use this piece of sh*tty work ?! :P
+
+The branches are just other projects of mine that is developed upon this 
+framework. They are so boring that you might not want to check them out.
+
+MrOrz, 2010.
