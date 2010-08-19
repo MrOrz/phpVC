@@ -33,8 +33,8 @@ class Dispatcher{
     /* parse result */
     $__controller = $__uri[0] === '' ? self::DEFAULT_CONTROLLER : $__uri[0];
     $__controller_obj = ucfirst($__controller).'Controller';
-    $__action     = $__uri[1] == ''  ? self::DEFAULT_ACTION     : $__uri[1];
-    $__params     = array_slice($__uri, 2);
+    $__action      = $__uri[1] == ''  ? self::DEFAULT_ACTION     : $__uri[1];
+    $__params      = array_slice($__uri, 2);
     
     /* dispatch */
     

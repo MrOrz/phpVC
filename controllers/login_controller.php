@@ -17,7 +17,7 @@ class LoginController extends Controller{
   
   static function index($p){
     if(isset($_SESSION['uid']))
-      parent::redirect('choice/index');
+      parent::redirect('book/index');
     else
       parent::render('login' , 'index', $p);
   }
@@ -42,7 +42,7 @@ class LoginController extends Controller{
         parent::render('login', 'index', array('msg'=>'您不在選課名單中'));
       $_SESSION['school_id'] = $school_id;
       $_SESSION['uid']       = $user[0]['id'];
-      parent::redirect('choice/index');
+      parent::redirect('book/index');
     }
   }
   

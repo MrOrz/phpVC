@@ -1,7 +1,7 @@
 <?php
 //ini_set('display_errors', 0);
 
-require('parse.php');
+require('dispatch.php');
 Dispatcher::dispatch();
 
 ?>
