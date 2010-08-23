@@ -1,10 +1,7 @@
 <?php
-class Database{
-  const DATABASE_URL  = 'localhost';
-  const DATABASE_NAME = '' ;
-  const USER          = '';
-  const PASSWORD      = '';
-  
+require('passwd.php'); /* defines DATABASE_URL, DATABASE_NAME, USER, PASSWORD. */
+
+class Database{ 
   const DEBUG = true;
   
   private  $_link;
@@ -15,9 +12,9 @@ class Database{
   }
 
   function __construct(){
-    $this->_link = mysql_connect(self::DATABASE_URL,self::USER,self::PASSWORD)
+    $this->_link = mysql_connect(DATABASE_URL,USER,PASSWORD)
       or $this->_err('mysql_connect fail');
-  	mysql_select_db(self::DATABASE_NAME, $this->_link)
+  	mysql_select_db(DATABASE_NAME, $this->_link)
 			or $this->_err("mysql_select_db failed");
 
 		mysql_query("SET CHARACTER SET 'utf8'", $this->_link);
@@ -45,8 +42,8 @@ class Database{
     return mysql_insert_id($this->_link);
   }
   public function escape($text){
-    //return $text;
-    return mysql_real_escape_string($text ,$this->_link);
+    return $text;
+    //return mysql_real_escape_string($text ,$this->_link);
   }
 };
     
