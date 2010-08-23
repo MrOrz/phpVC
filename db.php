@@ -24,14 +24,22 @@ class Database{
     mysql_close($this->_link);
     
   }
-  function getArr($sql){ // return row result as a 2-D array
+  // return row result as a 2-D array.
+  // if $index_column is specified, the returned 2D array will be indexed by the
+  // value of the specified column.
+  function getArr($sql, $index_column = ''){ 
     $table = mysql_query($sql, $this->_link) 
       or $this->_err($sql);
       
     $arr = array();               // the 2-d array to be returned
     if(mysql_num_rows($table)){
-      while($row = mysql_fetch_assoc($table))
-        array_push($arr, $row);   // push the entire row as one element in $arr
+      while($row = mysql_fetch_assoc($table)){
+        if($index_column === '')
+          $arr[] = $row;   // push the entire row as one element in $arr
+        else
+          $arr[$row[$index_column]] = $row;
+                            // push the entire row as one element in $arr
+      }
     }
     return $arr;
   }
