@@ -18,7 +18,7 @@ class Controller{
 
     if(!file_exists("views/layouts/$controller.php")){ // a controller without layout
       if(!file_exists($__view__))
-        error($controller, $action, "$__view__ does not exist.");
+        self::error($controller, $action, "$__view__ does not exist.");
         require($__view__);       // directly includes the view
         // $params can be used within the layout and view.
     }else{
