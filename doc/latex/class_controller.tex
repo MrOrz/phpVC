@@ -1,0 +1,235 @@
+\hypertarget{class_controller}{
+\section{Controller Class Reference}
+\label{class_controller}\index{Controller@{Controller}}
+}
+
+
+Defines \hyperlink{class_controller}{Controller} class.  
+
+
+Inheritance diagram for Controller:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_controller}
+\end{center}
+\end{figure}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{class_controller_a5b07b6865d0d974cd0e7198affae054f}{render} (\$controller, \$action, \$params=NULL)
+\begin{DoxyCompactList}\small\item\em renders a view of the specific action, with the layout for the specific controller. \item\end{DoxyCompactList}\item 
+static \hyperlink{class_controller_a6d111024445bc17d76a64b45f49d2d69}{redirect} (\$url, \$\_\-get=NULL)
+\begin{DoxyCompactList}\small\item\em redirect to a specific url, which will invoke the controller method call \item\end{DoxyCompactList}\item 
+static \hyperlink{class_controller_a18b050608bad4c25d29425778c76af49}{path\_\-to} (\$controller, \$action, \$\_\-get=NULL)
+\begin{DoxyCompactList}\small\item\em returns a string representing an URL path pointing to an action \item\end{DoxyCompactList}\item 
+static \hyperlink{class_controller_a86600c0af25bc98587b49950b3ae4408}{stylesheet\_\-link\_\-tag} (\$file\_\-name)
+\begin{DoxyCompactList}\small\item\em returns a string of a link tag \item\end{DoxyCompactList}\item 
+static \hyperlink{class_controller_a6732e0005a1160d36b0287eb95204755}{javascript\_\-include\_\-tag} (\$file\_\-name)
+\begin{DoxyCompactList}\small\item\em returns a string of a script tag \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Defines \hyperlink{class_controller}{Controller} class. \hyperlink{class_controller}{Controller} provides common static methods such as render the views, redirect to another url and some helper functions that helps with the view. \hyperlink{class_controller}{Controller} class will be inherited by other controllers. Inherited controllers, or Derived controllers, must follow the naming rule of \{Controllername\}\hyperlink{class_controller}{Controller}, for example, UserController. the name of the controller is followed by the word 'Controller' with the first letter capitalized. Notice that in PHP, class names are case-\/sensitive. 
+
+Definition at line 16 of file controller.php.
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_controller_a6732e0005a1160d36b0287eb95204755}{
+\index{Controller@{Controller}!javascript\_\-include\_\-tag@{javascript\_\-include\_\-tag}}
+\index{javascript\_\-include\_\-tag@{javascript\_\-include\_\-tag}!Controller@{Controller}}
+\subsubsection[{javascript\_\-include\_\-tag}]{\setlength{\rightskip}{0pt plus 5cm}static javascript\_\-include\_\-tag (
+\begin{DoxyParamCaption}
+\item[{\$}]{ file\_\-name}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}static\mbox{]}}}}
+\label{class_controller_a6732e0005a1160d36b0287eb95204755}
+
+
+returns a string of a script tag 
+
+
+
+Definition at line 94 of file controller.php.
+
+
+
+
+\begin{DoxyCode}
+                                                           {
+    $script_path = substr($_SERVER['SCRIPT_NAME'], 0, strrpos($_SERVER['SCRIPT_NA
+      ME'], '/')+1);
+    srand(); $salt = rand();
+    return "<script type=\"text/javascript\" src=\"$script_path$file_name?$salt\"
+      ></script>\n";
+  }
+\end{DoxyCode}
+
+
+\hypertarget{class_controller_a18b050608bad4c25d29425778c76af49}{
+\index{Controller@{Controller}!path\_\-to@{path\_\-to}}
+\index{path\_\-to@{path\_\-to}!Controller@{Controller}}
+\subsubsection[{path\_\-to}]{\setlength{\rightskip}{0pt plus 5cm}static path\_\-to (
+\begin{DoxyParamCaption}
+\item[{\$}]{ controller, }
+\item[{\$}]{ action, }
+\item[{\$}]{ \_\-get = {\ttfamily NULL}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}static\mbox{]}}}}
+\label{class_controller_a18b050608bad4c25d29425778c76af49}
+
+
+returns a string representing an URL path pointing to an action 
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em \$controller}]controller name \item[{\em \$action}]action name \item[{\em \$\_\-get}]the \$\_\-GET\mbox{[}\mbox{]} array to attach on the layout \end{DoxyParams}
+
+
+Definition at line 78 of file controller.php.
+
+
+
+
+\begin{DoxyCode}
+                                                                  {
+    $script_path = substr($_SERVER['SCRIPT_NAME'], 0, strrpos($_SERVER['SCRIPT_NA
+      ME'], '/')+1);
+    if(is_array($_get))
+      return $script_path.$controller.'/'.$action.'?'.http_build_query($_get);
+    else
+      return $script_path.$controller.'/'.$action;
+  }
+\end{DoxyCode}
+
+
+\hypertarget{class_controller_a6d111024445bc17d76a64b45f49d2d69}{
+\index{Controller@{Controller}!redirect@{redirect}}
+\index{redirect@{redirect}!Controller@{Controller}}
+\subsubsection[{redirect}]{\setlength{\rightskip}{0pt plus 5cm}static redirect (
+\begin{DoxyParamCaption}
+\item[{\$}]{ url, }
+\item[{\$}]{ \_\-get = {\ttfamily NULL}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}static\mbox{]}}}}
+\label{class_controller_a6d111024445bc17d76a64b45f49d2d69}
+
+
+redirect to a specific url, which will invoke the controller method call 
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em \$url}]an url like login/index \item[{\em \$\_\-get}]the \$\_\-GET\mbox{[}\mbox{]} array to attach on the layout \end{DoxyParams}
+
+
+Definition at line 58 of file controller.php.
+
+
+
+
+\begin{DoxyCode}
+                                                   {
+    $script_path = substr($_SERVER['SCRIPT_NAME'], 0, strrpos($_SERVER['SCRIPT_NA
+      ME'], '/')+1);
+    
+    if(is_array($_get))
+      header( "location: $script_path$url?".http_build_query($_get) );
+    else
+      header( "location: $script_path$url" );
+      
+    exit(0);
+  }
+\end{DoxyCode}
+
+
+\hypertarget{class_controller_a5b07b6865d0d974cd0e7198affae054f}{
+\index{Controller@{Controller}!render@{render}}
+\index{render@{render}!Controller@{Controller}}
+\subsubsection[{render}]{\setlength{\rightskip}{0pt plus 5cm}static render (
+\begin{DoxyParamCaption}
+\item[{\$}]{ controller, }
+\item[{\$}]{ action, }
+\item[{\$}]{ params = {\ttfamily NULL}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}static\mbox{]}}}}
+\label{class_controller_a5b07b6865d0d974cd0e7198affae054f}
+
+
+renders a view of the specific action, with the layout for the specific controller. 
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em \$controller}]layout to use \item[{\em \$action}]view to put in layout \item[{\em \$params}]params passed into the layout and the view \end{DoxyParams}
+
+
+\$\_\-\_\-script\_\-path specifies the current script path (to the root of the app). It can be used inside views and layouts.
+
+A layout should contain \char`\"{}require(\$\_\-\_\-view\_\-\_\-);\char`\"{} to call the view. 
+
+
+
+Definition at line 32 of file controller.php.
+
+
+
+
+\begin{DoxyCode}
+                                                                   {
+    $__script_path = substr($_SERVER['SCRIPT_NAME'], 0, strrpos($_SERVER['SCRIPT_
+      NAME'], '/')+1); 
+    $__view__ = "views/$controller/$action.php";
+
+    if(!file_exists("views/layouts/$controller.php")){ // a controller without la
+      yout
+      if(!file_exists($__view__))
+        self::error($controller, $action, "$__view__ does not exist.");
+        require($__view__);       // directly includes the view
+        // $params can be used within the layout and view.
+    }else{
+      // include the layout
+      require("views/layouts/$controller.php");
+      
+      // $params can be used within the layout and view.
+    }
+    exit(0);
+  }
+\end{DoxyCode}
+
+
+\hypertarget{class_controller_a86600c0af25bc98587b49950b3ae4408}{
+\index{Controller@{Controller}!stylesheet\_\-link\_\-tag@{stylesheet\_\-link\_\-tag}}
+\index{stylesheet\_\-link\_\-tag@{stylesheet\_\-link\_\-tag}!Controller@{Controller}}
+\subsubsection[{stylesheet\_\-link\_\-tag}]{\setlength{\rightskip}{0pt plus 5cm}static stylesheet\_\-link\_\-tag (
+\begin{DoxyParamCaption}
+\item[{\$}]{ file\_\-name}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}static\mbox{]}}}}
+\label{class_controller_a86600c0af25bc98587b49950b3ae4408}
+
+
+returns a string of a link tag 
+
+
+
+Definition at line 87 of file controller.php.
+
+
+
+
+\begin{DoxyCode}
+                                                        {
+    $script_path = substr($_SERVER['SCRIPT_NAME'], 0, strrpos($_SERVER['SCRIPT_NA
+      ME'], '/')+1);
+    srand(); $salt = rand();
+    return "<link href=\"$script_path$file_name?$salt\" rel=\"stylesheet\" type=\
+      "text/css\" />\n";
+  }
+\end{DoxyCode}
+
+
+
+
+The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+C:/AppServ/www/book/\hyperlink{controller_8php}{controller.php}\end{DoxyCompactItemize}

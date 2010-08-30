@@ -1,0 +1,247 @@
+\hypertarget{class_database}{
+\section{Database Class Reference}
+\label{class_database}\index{Database@{Database}}
+}
+
+
+defines Database(), an interface object providing access to the database.  
+
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_database_a095c5d389db211932136b53f25f39685}{\_\-\_\-construct} ()
+\begin{DoxyCompactList}\small\item\em connect to the database when an instance of \hyperlink{class_database}{Database} is created. \item\end{DoxyCompactList}\item 
+\hyperlink{class_database_a421831a265621325e1fdd19aace0c758}{\_\-\_\-destruct} ()
+\begin{DoxyCompactList}\small\item\em close the database connection when an instance of \hyperlink{class_database}{Database} destroied. \item\end{DoxyCompactList}\item 
+\hyperlink{class_database_adcf17a809c87f756d7645da0483e9362}{getArr} (\$sql, \$index\_\-column= '')
+\begin{DoxyCompactList}\small\item\em return row result as a 2-\/D array. \item\end{DoxyCompactList}\item 
+\hyperlink{class_database_ac9fddec3f6bd1db128887a1b211d90f0}{query} (\$query)
+\begin{DoxyCompactList}\small\item\em sends a query to the database \item\end{DoxyCompactList}\item 
+\hyperlink{class_database_adda9fb830c1f42c98e409084d5e765b7}{getInsertId} ()
+\begin{DoxyCompactList}\small\item\em returns the last inserted id. \item\end{DoxyCompactList}\item 
+\hyperlink{class_database_a7b8701a38c6f1b80fd0659bfda3a68f7}{escape} (\$text)
+\begin{DoxyCompactList}\small\item\em returns a sanitized string that is ready to be inserted to the SQL command. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Data Fields}
+\begin{DoxyCompactItemize}
+\item 
+const \hyperlink{class_database_a758c150b67e476ecf77478f16b387c61}{DEBUG} = true
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+defines Database(), an interface object providing access to the database. 
+
+Definition at line 5 of file db.php.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_database_a095c5d389db211932136b53f25f39685}{
+\index{Database@{Database}!\_\-\_\-construct@{\_\-\_\-construct}}
+\index{\_\-\_\-construct@{\_\-\_\-construct}!Database@{Database}}
+\subsubsection[{\_\-\_\-construct}]{\setlength{\rightskip}{0pt plus 5cm}\_\-\_\-construct (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{class_database_a095c5d389db211932136b53f25f39685}
+
+
+connect to the database when an instance of \hyperlink{class_database}{Database} is created. 
+
+
+
+Definition at line 17 of file db.php.
+
+
+
+
+\begin{DoxyCode}
+                        {
+    $this->_link = mysql_connect(DATABASE_URL,USER,PASSWORD)
+      or $this->_err('mysql_connect fail');
+    mysql_select_db(DATABASE_NAME, $this->_link)
+      or $this->_err("mysql_select_db failed");
+
+    mysql_query("SET CHARACTER SET 'utf8'", $this->_link);
+  }
+\end{DoxyCode}
+
+
+\hypertarget{class_database_a421831a265621325e1fdd19aace0c758}{
+\index{Database@{Database}!\_\-\_\-destruct@{\_\-\_\-destruct}}
+\index{\_\-\_\-destruct@{\_\-\_\-destruct}!Database@{Database}}
+\subsubsection[{\_\-\_\-destruct}]{\setlength{\rightskip}{0pt plus 5cm}\_\-\_\-destruct (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{class_database_a421831a265621325e1fdd19aace0c758}
+
+
+close the database connection when an instance of \hyperlink{class_database}{Database} destroied. 
+
+
+
+Definition at line 27 of file db.php.
+
+
+
+
+\begin{DoxyCode}
+                       {
+    mysql_close($this->_link);
+    
+  }
+\end{DoxyCode}
+
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_database_a7b8701a38c6f1b80fd0659bfda3a68f7}{
+\index{Database@{Database}!escape@{escape}}
+\index{escape@{escape}!Database@{Database}}
+\subsubsection[{escape}]{\setlength{\rightskip}{0pt plus 5cm}escape (
+\begin{DoxyParamCaption}
+\item[{\$}]{ text}
+\end{DoxyParamCaption}
+)}}
+\label{class_database_a7b8701a38c6f1b80fd0659bfda3a68f7}
+
+
+returns a sanitized string that is ready to be inserted to the SQL command. 
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em \$text}]string to be sanitized \end{DoxyParams}
+
+
+Definition at line 65 of file db.php.
+
+
+
+
+\begin{DoxyCode}
+                               {
+    return mysql_real_escape_string($text ,$this->_link);
+  }
+\end{DoxyCode}
+
+
+\hypertarget{class_database_adcf17a809c87f756d7645da0483e9362}{
+\index{Database@{Database}!getArr@{getArr}}
+\index{getArr@{getArr}!Database@{Database}}
+\subsubsection[{getArr}]{\setlength{\rightskip}{0pt plus 5cm}getArr (
+\begin{DoxyParamCaption}
+\item[{\$}]{ sql, }
+\item[{\$}]{ index\_\-column = {\ttfamily ''}}
+\end{DoxyParamCaption}
+)}}
+\label{class_database_adcf17a809c87f756d7645da0483e9362}
+
+
+return row result as a 2-\/D array. 
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em \$sql}]the SQL command as text. \item[{\em \$index\_\-column}]when specified, the returned 2D array will be indexed by the value of the specified column. \end{DoxyParams}
+
+
+Definition at line 37 of file db.php.
+
+
+
+
+\begin{DoxyCode}
+                                           { 
+    $table = mysql_query($sql, $this->_link) 
+      or $this->_err($sql);
+      
+    $arr = array();               // the 2-d array to be returned
+    if(mysql_num_rows($table)){
+      while($row = mysql_fetch_assoc($table)){
+        if($index_column === '')
+          $arr[] = $row;   // push the entire row as one element in $arr
+        else
+          $arr[$row[$index_column]] = $row;
+                            // push the entire row as one element in $arr
+      }
+    }
+    return $arr;
+  }
+\end{DoxyCode}
+
+
+\hypertarget{class_database_adda9fb830c1f42c98e409084d5e765b7}{
+\index{Database@{Database}!getInsertId@{getInsertId}}
+\index{getInsertId@{getInsertId}!Database@{Database}}
+\subsubsection[{getInsertId}]{\setlength{\rightskip}{0pt plus 5cm}getInsertId (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{class_database_adda9fb830c1f42c98e409084d5e765b7}
+
+
+returns the last inserted id. 
+
+
+
+Definition at line 58 of file db.php.
+
+
+
+
+\begin{DoxyCode}
+                               {
+    return mysql_insert_id($this->_link);
+  }
+\end{DoxyCode}
+
+
+\hypertarget{class_database_ac9fddec3f6bd1db128887a1b211d90f0}{
+\index{Database@{Database}!query@{query}}
+\index{query@{query}!Database@{Database}}
+\subsubsection[{query}]{\setlength{\rightskip}{0pt plus 5cm}query (
+\begin{DoxyParamCaption}
+\item[{\$}]{ query}
+\end{DoxyParamCaption}
+)}}
+\label{class_database_ac9fddec3f6bd1db128887a1b211d90f0}
+
+
+sends a query to the database 
+
+
+
+Definition at line 54 of file db.php.
+
+
+
+
+\begin{DoxyCode}
+                               {
+    return mysql_query($query, $this->_link) or $this->_err($query);
+  }
+\end{DoxyCode}
+
+
+
+
+\subsection{Field Documentation}
+\hypertarget{class_database_a758c150b67e476ecf77478f16b387c61}{
+\index{Database@{Database}!DEBUG@{DEBUG}}
+\index{DEBUG@{DEBUG}!Database@{Database}}
+\subsubsection[{DEBUG}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf DEBUG} = true}}
+\label{class_database_a758c150b67e476ecf77478f16b387c61}
+debug flag. When set to true, detailed error message is available. 
+
+Definition at line 6 of file db.php.
+
+
+
+The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+C:/AppServ/www/book/\hyperlink{db_8php}{db.php}\end{DoxyCompactItemize}

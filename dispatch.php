@@ -1,10 +1,12 @@
 <?php
+/// parses the url and invokes the correct controller.
 class Dispatcher{
 
-  const DEBUG = true;
-  const DEFAULT_CONTROLLER = 'test';
-  const DEFAULT_ACTION     = 'page';
+  const DEBUG = true;     /**< debug flag. When set to true, detailed error message is available. */
+  const DEFAULT_CONTROLLER = 'test';  /**< default controller to go when the controller is not specified in URL */
+  const DEFAULT_ACTION     = 'page';  /**< default action to go when the action is not specified in URL */
   
+  /// error handling function that prints out routing errors
   private static function error($controller, $action, $params, $msg){
     echo "<h1>Error occurred</h1><p>$msg</p>";
     if(DEBUG){
@@ -18,15 +20,12 @@ class Dispatcher{
     exit(0);
   }
 
+  /// parses the url and invokes the controller
   static function dispatch(){
 
     /* parse the url */
     $__script_path = substr($_SERVER['SCRIPT_NAME'], 0, strrpos($_SERVER['SCRIPT_NAME'], '/')+1);
     $__uri = preg_split('/[\/?&]+/', substr($_SERVER['REQUEST_URI'], strlen($__script_path)));
-    
-    //var_dump($__script_path);
-    //print_r($__uri);    
-    //exit(0);  
     
     /* parse result */
     $__controller = $__uri[0] === '' ? self::DEFAULT_CONTROLLER : $__uri[0];

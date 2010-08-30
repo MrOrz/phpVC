@@ -1,0 +1,134 @@
+\hypertarget{class_dispatcher}{
+\section{Dispatcher Class Reference}
+\label{class_dispatcher}\index{Dispatcher@{Dispatcher}}
+}
+
+
+parses the url and invokes the correct controller.  
+
+
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{class_dispatcher_a9db80663131dad4a801b9607109e83ab}{dispatch} ()
+\begin{DoxyCompactList}\small\item\em parses the url and invokes the controller \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Data Fields}
+\begin{DoxyCompactItemize}
+\item 
+const \hyperlink{class_dispatcher_a758c150b67e476ecf77478f16b387c61}{DEBUG} = true
+\item 
+const \hyperlink{class_dispatcher_ae05204cd87e8b77b35a92c595e4d897a}{DEFAULT\_\-CONTROLLER} = 'test'
+\item 
+const \hyperlink{class_dispatcher_ae7732757767a78bbaef974ad2821748c}{DEFAULT\_\-ACTION} = 'page'
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+parses the url and invokes the correct controller. 
+
+Definition at line 3 of file dispatch.php.
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_dispatcher_a9db80663131dad4a801b9607109e83ab}{
+\index{Dispatcher@{Dispatcher}!dispatch@{dispatch}}
+\index{dispatch@{dispatch}!Dispatcher@{Dispatcher}}
+\subsubsection[{dispatch}]{\setlength{\rightskip}{0pt plus 5cm}static dispatch (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}static\mbox{]}}}}
+\label{class_dispatcher_a9db80663131dad4a801b9607109e83ab}
+
+
+parses the url and invokes the controller 
+
+
+
+Definition at line 24 of file dispatch.php.
+
+
+
+
+\begin{DoxyCode}
+                            {
+
+    /* parse the url */
+    $__script_path = substr($_SERVER['SCRIPT_NAME'], 0, strrpos($_SERVER['SCRIPT_
+      NAME'], '/')+1);
+    $__uri = preg_split('/[\/?&]+/', substr($_SERVER['REQUEST_URI'], strlen($__sc
+      ript_path)));
+    
+    /* parse result */
+    $__controller = $__uri[0] === '' ? self::DEFAULT_CONTROLLER : $__uri[0];
+    $__controller_obj = ucfirst($__controller).'Controller';
+    $__action      = $__uri[1] == ''  ? self::DEFAULT_ACTION     : $__uri[1];
+    $__params      = array_slice($__uri, 2);
+    
+    /* dispatch */
+    
+    // check if the controller exists
+    if( !file_exists("controllers/{$__controller}_controller.php") )
+      self::error($__controller, $__action, $__params,
+        "No such controller called '$__controller'. ");
+    
+    // include the model and the controller
+    session_start();    
+    require('db.php');
+    require('controller.php');
+    require("controllers/{$__controller}_controller.php");
+    
+    // check if the controller object exists
+    if( !class_exists($__controller_obj) )
+      self::error($__controller, $__action, $__params,
+        "$__controller has no class called '$__controller_obj'. ");
+    
+    // check if the action exists
+    if( !method_exists($__controller_obj, $__action) )
+      self::error($__controller, $__action, $__params,
+        "$__controller has no action (static method) called '$__action'. ");
+    
+    // invoke the action
+    //$__controller_obj::$__action($__params);  // php 5.3.x or later
+    call_user_func(array($__controller_obj, $__action), $__params);
+
+  }
+\end{DoxyCode}
+
+
+
+
+\subsection{Field Documentation}
+\hypertarget{class_dispatcher_a758c150b67e476ecf77478f16b387c61}{
+\index{Dispatcher@{Dispatcher}!DEBUG@{DEBUG}}
+\index{DEBUG@{DEBUG}!Dispatcher@{Dispatcher}}
+\subsubsection[{DEBUG}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf DEBUG} = true}}
+\label{class_dispatcher_a758c150b67e476ecf77478f16b387c61}
+debug flag. When set to true, detailed error message is available. 
+
+Definition at line 5 of file dispatch.php.
+
+\hypertarget{class_dispatcher_ae7732757767a78bbaef974ad2821748c}{
+\index{Dispatcher@{Dispatcher}!DEFAULT\_\-ACTION@{DEFAULT\_\-ACTION}}
+\index{DEFAULT\_\-ACTION@{DEFAULT\_\-ACTION}!Dispatcher@{Dispatcher}}
+\subsubsection[{DEFAULT\_\-ACTION}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf DEFAULT\_\-ACTION} = 'page'}}
+\label{class_dispatcher_ae7732757767a78bbaef974ad2821748c}
+default action to go when the action is not specified in URL 
+
+Definition at line 7 of file dispatch.php.
+
+\hypertarget{class_dispatcher_ae05204cd87e8b77b35a92c595e4d897a}{
+\index{Dispatcher@{Dispatcher}!DEFAULT\_\-CONTROLLER@{DEFAULT\_\-CONTROLLER}}
+\index{DEFAULT\_\-CONTROLLER@{DEFAULT\_\-CONTROLLER}!Dispatcher@{Dispatcher}}
+\subsubsection[{DEFAULT\_\-CONTROLLER}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf DEFAULT\_\-CONTROLLER} = 'test'}}
+\label{class_dispatcher_ae05204cd87e8b77b35a92c595e4d897a}
+default controller to go when the controller is not specified in URL 
+
+Definition at line 6 of file dispatch.php.
+
+
+
+The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+C:/AppServ/www/book/\hyperlink{dispatch_8php}{dispatch.php}\end{DoxyCompactItemize}
